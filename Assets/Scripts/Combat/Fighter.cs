@@ -13,7 +13,7 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
 
         Health target;
-        float timeSinceLastAttack = 0;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         Move move;
         ActionScheduler actionScheduler;
@@ -31,7 +31,6 @@ namespace RPG.Combat
 
         private void Update()
         {
-            if(GetComponent<Health>().IsDead()) { return; }
             timeSinceLastAttack += Time.deltaTime;
             if (target == null) { return; }
             transform.LookAt(target.transform);
@@ -58,6 +57,7 @@ namespace RPG.Combat
         public void Cancel()
         {
             target = null;
+            move.Cancel();
             GetComponent<Animator>().ResetTrigger("Attack");
             GetComponent<Animator>().SetTrigger("StopAttack");
         }

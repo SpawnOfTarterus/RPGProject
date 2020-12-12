@@ -8,24 +8,32 @@ namespace RPG.Movement
 {
     public class Move : MonoBehaviour, IAction
     {
-        [SerializeField] float moveSpeed = 1f;
+        [SerializeField] float maxSpeed = 10f;
 
         float speedRatio;
         
         NavMeshAgent myMeshAgent;
         Animator myAnimator;
         ActionScheduler myActionScheduler;
+        Health health;
+
+        public void SetMoveSpeed(float newSpeed)
+        {
+            myMeshAgent.speed = newSpeed;
+        }
 
         void Start()
         {
             myMeshAgent = GetComponent<NavMeshAgent>();
             myAnimator = GetComponent<Animator>();
             myActionScheduler = GetComponent<ActionScheduler>();
-            myMeshAgent.speed = moveSpeed;
+            health = GetComponent<Health>();
+            myMeshAgent.speed = maxSpeed;
         }
 
         void Update()
         {
+            myMeshAgent.enabled = !health.IsDead();
             UpdateAnimation();
         }
 
@@ -48,7 +56,7 @@ namespace RPG.Movement
 
         private void UpdateAnimation()
         {
-            speedRatio = myMeshAgent.velocity.magnitude / myMeshAgent.speed;
+            speedRatio = myMeshAgent.velocity.magnitude / maxSpeed;
             myAnimator.SetFloat("Blend", speedRatio);
         }
     }

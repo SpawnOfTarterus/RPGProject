@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 5
+  suspicionTime: 2
+  chaseSpeed: 6
+  patrolSpeed: 2
+  patrolPath: {fileID: 0}
+  stopAndLookTime: 3
 --- !u!114 &-3007474367356152329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +97,10 @@ PrefabInstance:
     - target: {fileID: 1225134275, guid: 71fb2ea510cb93542bf3e8c3705b3f50, type: 3}
       propertyPath: moveSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225134275, guid: 71fb2ea510cb93542bf3e8c3705b3f50, type: 3}
+      propertyPath: maxSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3159174661798480170, guid: 71fb2ea510cb93542bf3e8c3705b3f50, type: 3}
       propertyPath: m_LocalPosition.x
